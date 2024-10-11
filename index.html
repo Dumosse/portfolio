@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Portfolio</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <div class="container">
+           <div class="stickySide">
+                <div class="sideBar">
+                    <div class="profile">
+                        <img src="assets/gradient.jpg" class="gradientImg"/>
+                        <img src="assets/profile.jpg" class="profileImg"/>
+                        <div class="profileText">
+                            <h2>Justine Cabreros</h2>
+                            <h4>Web Developer</h4>
+                        </div>
+                        <div class="downloadCV">
+                            <img src="assets/download.svg" />
+                            <a class="mailBox" name="Email" href="mailto:justinecabreros1@gmail.com">
+                             Download CV
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <div class="iconLinks">
+                        <a href="https://github.com/Dumosse" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/github.svg" class="github" alt="GitHub"/>
+                        </a>
+                        <a href="https://www.linkedin.com/in/justine-cabreros-1b0922330/" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/linkedIn.svg" class="linkedIn" alt="LinkedIn"/>
+                        </a>
+                        <a href="mailto:justinecabreros1@gmail.com">
+                            <img src="assets/mail.svg" class="mailMe" alt="Email"/>
+                        </a>
+                    </div>
+                </div>
+           </div> 
+           <div class="content">
+                <div class="aboutMe">
+                    <div class="contentHeader">
+                        <div class="circle"></div>
+                        <p>About</p>
+                    </div>
+                    <p>
+                        Hi! I'm Justine Cabreros, a dedicated web developer and a student on a journey to master the art of building beautiful and functional websites. I am passionate about learning and constantly improving my skills. My focus is on creating intuitive, user-friendly web experiences using the latest technologies.<br><br>
+                        As a hardworking individual, I thrive on tackling challenges and solving problems, whether it’s through coding or exploring new ways to enhance the user experience. My current expertise includes working with React and CSS Modules, but I’m always eager to learn more and grow as a developer. <br><br>
+                        Balancing my studies with my development work, I’m committed to both academic excellence and practical skill-building. I believe in the power of perseverance and a growth mindset, and I'm excited about the opportunities that lie ahead in the world of web development.
+                    </p>
+                </div>
+
+                <div class="projects">
+                    <div class="contentHeader">
+                        <div class="circle"></div>
+                        <p>Projects</p>
+                    </div>
+                    <div id="projectGrids" class="projectGrids">
+                    
+                    </div>
+
+                    <div class="pagination">
+                        <button id="prevBtn" class="paginationBtn" onclick="prevPage()">
+                            <img src="assets/left-arrow.svg" alt="Previous" class="arrowIcon" />
+                        </button>
+                        <div id="paginationDots" class="paginationDots"></div>
+                        <button id="nextBtn" class="paginationBtn" onclick="nextPage()">
+                            <img src="assets/right-arrow.svg" alt="Next" class="arrowIcon" />
+                        </button>
+                    </div>
+                                   
+                </div>
+
+                <div class="expertise">
+                    <div class="contentHeader">
+                        <div class="circle"></div>
+                        <p>Expertise</p>
+                    </div>
+                    <div class="expertiseContainer">
+                        <div class="expertiseBox">
+                            <img src="assets/js.svg" />
+                            <p>Javascript</p>
+                        </div>
+                        <div class="expertiseBox">
+                            <img src="assets/html.svg" />
+                            <p>HTML</p>
+                        </div>
+                        <div class="expertiseBox">
+                            <img src="assets/css.svg" />
+                            <p>CSS</p>
+                        </div>
+                        <div class="expertiseBox">
+                            <img src="assets/java.svg" />
+                            <p>Java</p>
+                        </div>
+                        <div class="expertiseBox">
+                            <img src="assets/react.svg" />
+                            <p>React</p>
+                        </div>
+                        <div class="expertiseBox">
+                            <img src="assets/postgres.svg" />
+                            <p>Postgres</p>
+                        </div>
+                        <div class="expertiseBox">
+                            <img src="assets/mysql.svg" />
+                            <p>MySql</p>
+                        </div>
+                        <div class="expertiseBox">
+                            <img src="assets/python.svg" class="pythonImg"/>
+                            <p>Python</p>
+                        </div>
+                    </div>
+                </div>
+           </div>
+        </div>
+
+
+        <script>
+            // Sample projects data
+            const projects = [
+                { title: "CITU Streamlined Service Portal", image: "assets/streamline.png", description: "Web Development", gitHubLink: "https://github.com/Dumosse/streamlined-service-portal.git" },
+                { title: "Smart News Digest", image: "assets/news-digest.png", description: "News Summarizer", gitHubLink: "https://github.com/Dumosse/news-digest.git" },
+                { title: "Pima Indians Diabetes Exploration", image: "assets/diabetes-analysis.png", description: "Data Visualization", gitHubLink: "https://github.com/Dumosse/diabetes-analysis.git" },
+                { title: "Portfolio Website", image: "assets/portfolio.png", description: "Web Design", gitHubLink: "https://github.com/username/portfolio" }
+            ];
+            
+            let currentPage = 1;
+            const itemsPerPage = 2;
+            const totalPages = Math.ceil(projects.length / itemsPerPage);
+            
+            function displayProjects(page) {
+                const projectGrid = document.getElementById("projectGrids");
+                projectGrid.classList.remove('show');
+        
+                setTimeout(() => {
+                    projectGrid.innerHTML = ''; 
+            
+                    const start = (page - 1) * itemsPerPage;
+                    const end = start + itemsPerPage;
+                    const paginatedProjects = projects.slice(start, end);
+            
+                    paginatedProjects.forEach(project => {
+                        const projectCard = `
+                        <a href="${project.gitHubLink}" target="_blank">
+                            <div class="projectCards">
+                                    <img src="${project.image}" class="cardsImg"/>
+                                    <div class="cardDetails">
+                                        <h3>${project.title}</h3>
+                                        <div class="projectChildRow">
+                                            <div class="descriptionContainer">
+                                                <h4 class="description">${project.description}</h4>
+                                            </div>
+                                            <img src="assets/arrow.svg" class="arrowSvg"/>
+                                        </div>
+                                    </div>
+                            </div>
+                        </a>   
+                        `;
+                        projectGrid.innerHTML += projectCard;
+                    });
+            
+                    updatePaginationDots(page);
+                    document.getElementById('prevBtn').disabled = currentPage === 1;
+                    document.getElementById('nextBtn').disabled = currentPage === totalPages;
+    
+                    projectGrid.classList.add('show'); // Add 'show' class to make it visible
+                }, 300); // Delay for transition smoothness
+            }
+            
+            function updatePaginationDots(page) {
+                const paginationDots = document.getElementById('paginationDots');
+                paginationDots.innerHTML = ''; // Clear existing dots
+                for (let i = 1; i <= totalPages; i++) {
+                    const dot = document.createElement('span');
+                    dot.className = 'dot';
+                    dot.textContent = '•'; // You can use other characters or styles
+                    dot.style.cursor = 'pointer'; // Change the cursor to indicate it's clickable
+                    dot.addEventListener('click', () => {
+                        currentPage = i; // Set the current page to the clicked dot's number
+                        displayProjects(currentPage);
+                    });
+                    if (i === page) {
+                        dot.style.fontWeight = 'bold'; // Highlight the active page dot
+                    }
+                    paginationDots.appendChild(dot);
+                }
+            }
+            
+            // Next page function
+            function nextPage() {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    displayProjects(currentPage);
+                }
+            }
+            
+            // Previous page function
+            function prevPage() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    displayProjects(currentPage);
+                }
+            }
+            
+            // Load initial projects
+            displayProjects(currentPage);
+        </script>
+        
+    </body>
+</html>
