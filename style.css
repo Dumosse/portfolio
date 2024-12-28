@@ -462,11 +462,13 @@ a{
      outline-color: grey;
 }
 
-.expertiseBox .pythonImg{
-    width: 40px;
+.expertiseBox .springImg{
+    margin-left: 30px;
+}
+
+.expertiseBox .nodeImg{
     height: 40px;
-    margin-right: -5px;
-    margin-left: 5px;
+    width: 40px;
 }
 
 
